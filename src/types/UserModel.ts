@@ -1,3 +1,8 @@
+import { defaultInputValidator } from '../components/Utils/InputValidators'
+
+const onlyNumbersRegex = /^[0-9]*$/gm
+
+
 export class CreateUserModel {
   constructor(
     public name: string = '',
@@ -12,6 +17,13 @@ export class CreateUserModel {
 }
 export type CreateUserModelKeys = keyof CreateUserModel
 export const createUserModelKeys = Object.keys(new CreateUserModel()) as CreateUserModelKeys[];
+export const createUserModelKeysValidator =
+  createUserModelKeys.reduce( (acc, key) => acc.set(key,defaultInputValidator), new Map<string, (value: string) => [boolean, string]>())
+    .set("mail", (mail: string) => [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail), 'Formato de email incorrecto'] )
+    .set("dni", (dni: string) => [onlyNumbersRegex.test(dni), 'No debe contener con letras'])
+    .set("phone", (phone: string) => [onlyNumbersRegex.test(phone), 'No debe contener con letras'])
+    .set("password", (password: string) => [password.length >= 8, 'La contraseña debe tener mas de 8 letras'])
+
 
 export type CallCenter = {
   id: string,

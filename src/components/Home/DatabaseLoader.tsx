@@ -13,19 +13,22 @@ export const DatabaseLoader: React.FC<Props> = useConnect(({state}) => {
 
     React.useEffect(() => console.log(file), [file])
 
-    const handleChange = (evt: React.FormEvent<HTMLFormElement>) => {
-        evt.preventDefault()
-        const formData = new FormData( evt.currentTarget )
-        uploadDatabase(formData)
+    const handleChange = (evt: React.FormEvent<HTMLInputElement>) => {
+      evt.preventDefault()
+      const formData = new FormData()
+      debugger
+      // @ts-ignore
+      formData.append('file', evt.target.files[0])
+      uploadDatabase( formData )
     }
 
 
     if(openTab.identifier !== DatabasesPageId) return null
     return (
-      <form onSubmit={ handleChange } >
-          <input type={'file'} accept=".csv,.xls,.xlsx"/>
+      <div>
+          <input type={'file'} accept=".csv,.xls,.xlsx" onChange={ handleChange }/>
           <input type="submit" value={'Upload'}/>
-      </form>
+      </div>
     )
 })
 

@@ -9,7 +9,8 @@ export interface FormProps {
   inputList: string[];
   handleSubmit: (...values: string[]) => void;
   initialValues?: any;
-  inputTypes?: string[]
+  inputTypes?: string[];
+  validators: Map<string, (value: string) => [boolean, string] >
 }
 
 export interface FormAction {
@@ -36,22 +37,23 @@ export const Form : React.FC<Props> = ({
   buttonText,
   initialValues,
   inputTypes,
+  validators,
   ...props
 }) => {
 
   const inputs: Ref[] = inputList.map(useInput);
   const [state, dispatch] = React.useReducer(FormReducer, {hasErrors: false})
 
-  const submit = (): void => {
+  const submit = (evt: React.FormEvent ): void => {
+    evt.preventDefault()
     const values = inputs.map(ref => ref.value);
     handleSubmit(...values);
   };
 
-  React.useEffect(() => console.log(inputList, initialValues),[])
-
   return (
     <div {...props} className={"form"}>
       <header> {title} </header>
+      <form onSubmit={ submit }>
       {inputList.map((inputName, index) => (
         <Input
           initialValue={initialValues && initialValues[inputName]}
@@ -59,15 +61,19 @@ export const Form : React.FC<Props> = ({
           key={index}
           ref={inputs[index].ref}
           dispatch={dispatch}
-          isValid={state[inputName]}
+          isValid={validators.get(inputName)!}
           type={inputTypes? inputTypes[index] : "text"}
         />
       ))}
-      <button
-        disabled={state.hasErrors}
-        onClick={ submit }>
-        {buttonText}
-      </button>
+      <input
+        className={'submitter'}
+        type={'submit'}
+        // disabled={state.hasErrors}
+        onClick={ submit }
+        value={buttonText}
+        onSubmit={ console.log }
+        />
+      </form>
     </div>
   );
 };

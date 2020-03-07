@@ -1,9 +1,21 @@
-.formInput {
-    padding: .75rem;
+.input-container {
+  position: relative;
+  margin-top: .5rem;
+
+  .formInput {
+    padding: 0.75rem;
     font-size: 1rem;
-    border: 3px solid rgba(0,0,0,.3) ;
+    border: 3px solid rgba(0, 0, 0, 0.3);
     outline: none;
-    margin: .5rem 0;
+    margin: 0 0 .5rem 0;
     width: 20rem;
     background: var(--grey);
+  }
+  .error {
+    position: relative;
+    margin: 0;
+    background: red;
+    color: white;
+    padding: 0.5rem 0;
+  }
 }

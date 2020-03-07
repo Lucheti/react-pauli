@@ -7,7 +7,7 @@ import { createResource, WrappedPromise } from '../../requests/Suspense'
 import { LoginToken } from '../../types/loginToken'
 import { Spinner } from '../Spinner/Spinner'
 import { useConnect } from '../Utils/useConnect'
-import { UserModel } from '../../types/UserModel'
+import { createUserModelKeysValidator, UserModel } from '../../types/UserModel'
 
 interface Props {
   resource: (...args: string[]) => { data: { read(): LoginToken | undefined } }
@@ -40,6 +40,7 @@ export const LoginPage: React.FC<Props> = useConnect<Props>(({resource, state, d
         handleSubmit={ handleLogin }
         buttonText={'Entrar'}
         className={'form'}
+        validators={createUserModelKeysValidator}
       />
   </>
 )})

@@ -5,3 +5,9 @@ export const changeTab = (identifier: string): AppReducerAction => ({ payload: i
 
 const handleToggleNavbar = (state: AppReducerState ) => ({ ...state, navbarVisible: !state.navbarVisible })
 export const toggleNavbar = (): AppReducerAction => ({ handler: handleToggleNavbar })
+
+const handleLogout = (state: AppReducerState ): AppReducerState => {
+  localStorage.clear()
+  return {...state, access_token: ''}
+}
+export const logout = (): AppReducerAction => ({handler: handleLogout})

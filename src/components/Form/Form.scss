@@ -6,7 +6,7 @@
         font-size: 1.5rem;
     }
 
-    button {
+    .submitter {
         padding: 1rem;
         font-size: 1rem;
         background: var(--light-blue);
@@ -15,6 +15,7 @@
         outline: none;
         margin-top: 1rem;
         transition: 1s;
+        width: 100%;
 
         &:disabled {
             background: red;

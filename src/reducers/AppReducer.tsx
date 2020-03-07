@@ -12,6 +12,10 @@ export interface AppReducerState {
   access_token: string
   role: Role
   currentUser?: UserModel //el logueado
+  alert: {
+    alertMessage: string;
+    alertVisible: boolean
+  }
 }
 
 export interface AppReducerAction {
@@ -31,5 +35,9 @@ export const APP_REDUCER_INITIAL_STATE: AppReducerState = {
   editingUser: new UserModel(),
   access_token: localStorage.getItem('token') || "",
   role: Role.ADMIN,
-  openTab: new Tabber('operators-page')
+  openTab: new Tabber('operators-page'),
+  alert: {
+    alertMessage: 'some message',
+    alertVisible: true,
+  }
 };

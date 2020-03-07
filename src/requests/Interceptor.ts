@@ -1,4 +1,6 @@
 import fetchIntercept from 'fetch-intercept';
+import { useDispatch } from '../components/Utils/useConnect'
+import { showAlert } from '../components/Actions/AlertActions'
 
 
 export const initInterceptor = () =>
@@ -19,7 +21,11 @@ fetchIntercept.register({
 
   response: function (response) {
     console.log(response)
-    if (response.status === 400) localStorage.clear()
+    if(!response.ok) {
+      console.log(response)
+      response.json().then( console.log )
+    }
+    // if (response.status === 400) localStorage.clear()
     return response;
   },
 
