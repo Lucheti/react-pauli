@@ -1,33 +1,40 @@
 import React from 'react'
-import './AddUserForm.sass'
-import { useConnect } from '../../../Utils/Connect'
 import { createToggleModalAction } from '../../../Actions/ModalActions'
 import { Form } from '../../../Form/Form'
-import { userModelKeys } from '../../../../Types/UserModel'
-
-
+import { UserModel, userModelKeys } from '../../../../types/UserModel'
+import { useConnect } from '../../../Utils/useConnect'
+import { ModelPageContext } from '../../../Home/ModelPage/ModelPage'
+import { updateUser } from '../../../../requests/Requests'
 
 interface Props {
-  modalId?: string
+  modalId: string;
 }
 
-export const AddUserForm: React.FC<Props> = ({modalId}) => {
+export const EditUserForm: React.FC<Props> = useConnect<Props>(({ modalId, state, dispatch }) => {
+  const {editingUser} = state;
+  const {role, update} = React.useContext(ModelPageContext)
 
-  const [,dispatch] = useConnect()
 
   const onSubmit = (...data: string[]) => {
-    modalId && dispatch(createToggleModalAction(modalId))
-    console.log(data)
-  }
+    dispatch(createToggleModalAction(modalId));
+    const fullUser = [
+      ...data,
+      editingUser.id
+    ]
+    userModelKeys.reduce( (acc , key, index) => ({...acc, [key]: fullUser[index]}), {})
+    updateUser(...fullUser)
+      .then(() => update())
+  };
 
   return (
     <div>
       <Form
-        buttonText={"Agregar"}
-  inputList={userModelKeys( true )}
-  handleSubmit={ onSubmit }
-  title={'Agregar usuario'}
-  />
-  </div>
-);
-}
+        buttonText={"Guardar"}
+        inputList={userModelKeys}
+        handleSubmit={onSubmit}
+        title={"Editar usuario"}
+        initialValues={editingUser}
+      />
+    </div>
+  );
+})

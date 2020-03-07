@@ -1,18 +1,18 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
+import { useConnect } from './useConnect'
 
 interface Props {
   path: string,
   component: React.ComponentType,
-  authorize?: () => boolean
 }
 
-const defaultAuthorize = () => !!localStorage.getItem('role')
+export const PrivateRoute: React.FC<Props> = useConnect<Props>(({path, component, state}) => {
 
-export const PrivateRoute: React.FC<Props> = ({path, component, authorize = defaultAuthorize}) => {
+  const {access_token} = state
 
-  return  authorize()?
+  return  access_token?
     <Route path={path} component={ component }/>
     :
     <Redirect to={'/login'}/>
-}
+})

@@ -1,0 +1,23 @@
+.users {
+  padding: 5rem;
+  padding-left: 20vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  .title-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+    flex-flow: wrap-reverse;
+
+    .title {
+      text-align: left;
+      font-size: 2rem;
+      margin: 0;
+    }
+  }
+}

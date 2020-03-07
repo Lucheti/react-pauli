@@ -1,9 +1,7 @@
-import React from 'react'
-import { AppReducerAction } from '../../reducers/AppReducer'
+import { AppReducerAction, AppReducerState } from '../../reducers/AppReducer'
 
-export const TOGGLE_NAVBAR = 'toggle navbar'
-export const TOGGLE_NAVBAR_ACTION = { type: TOGGLE_NAVBAR }
-export const CHANGE_COMPONENT = 'change component'
-export const CHANGE_COMPONENT_ACTION = (component: React.FC): AppReducerAction => ({ type: CHANGE_COMPONENT, payload: component })
+const handleChangeTab = (state: AppReducerState, action: AppReducerAction) => ({ ...state, openTab: state.openTab.tab(action.payload) })
+export const changeTab = (identifier: string): AppReducerAction => ({ payload: identifier , handler: handleChangeTab})
 
-
+const handleToggleNavbar = (state: AppReducerState ) => ({ ...state, navbarVisible: !state.navbarVisible })
+export const toggleNavbar = (): AppReducerAction => ({ handler: handleToggleNavbar })

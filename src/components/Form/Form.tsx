@@ -3,31 +3,73 @@ import { Input } from './Input/Input'
 import { Ref, useInput } from '../Utils/CustomHooks'
 import './Form.scss'
 
-interface FormProps {
-  title?: string;
-  buttonText: string
+export interface FormProps {
+  title: string;
+  buttonText: string;
   inputList: string[];
-  onSubmit: (...values: (string | undefined)[]) => void
+  handleSubmit: (...values: string[]) => void;
+  initialValues?: any;
+  inputTypes?: string[]
 }
 
-type Props = FormProps & HTMLAttributes<HTMLDivElement>
+export interface FormAction {
+  name: string,
+  status: boolean
+}
 
-export const Form: React.FC<Props> = ({title, inputList, onSubmit, buttonText, ...props}) => {
+const FormReducer = (state: any, action: FormAction) => {
+  const newState = {...state, [action.name]: action.status}
+  const isValid = () =>
+    Object.keys(newState)
+      .filter( key => key !== 'hasErrors')
+        .reduce( (acc, key) => acc && newState[key], true)
 
-  if (!inputList) return null
+  return {...newState, hasErrors: !isValid()}
+}
 
-  const refs: Ref[] = inputList.map( useInput )
+type Props = FormProps & HTMLAttributes<HTMLDivElement>;
 
-  const submit = () => {
-    const values = refs.map(ref => ref.value)
-    onSubmit(...values)
-  }
+export const Form : React.FC<Props> = ({
+  title,
+  inputList,
+  handleSubmit,
+  buttonText,
+  initialValues,
+  inputTypes,
+  ...props
+}) => {
+
+  const inputs: Ref[] = inputList.map(useInput);
+  const [state, dispatch] = React.useReducer(FormReducer, {hasErrors: false})
+
+  const submit = (): void => {
+    const values = inputs.map(ref => ref.value);
+    handleSubmit(...values);
+  };
+
+  React.useEffect(() => console.log(inputList, initialValues),[])
 
   return (
-    <div {...props} className={'form'}>
-      {title && <header> {title} </header>}
-      {inputList.map((inputName, index) => <Input placeholder={inputName} key={index} ref={refs[index].ref!}/>)}
-      <button onClick={submit}>{buttonText}</button>
+    <div {...props} className={"form"}>
+      <header> {title} </header>
+      {inputList.map((inputName, index) => (
+        <Input
+          initialValue={initialValues && initialValues[inputName]}
+          name={inputName}
+          key={index}
+          ref={inputs[index].ref}
+          dispatch={dispatch}
+          isValid={state[inputName]}
+          type={inputTypes? inputTypes[index] : "text"}
+        />
+      ))}
+      <button
+        disabled={state.hasErrors}
+        onClick={ submit }>
+        {buttonText}
+      </button>
     </div>
-  )
-}
+  );
+};
+
+export const formIdentifier = 'form'

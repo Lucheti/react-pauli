@@ -1,0 +1,29 @@
+.login {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: var(--black);
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.form-wrapper {
+    width: min-content;
+}
+
+.error {
+    margin: 1rem 0;
+    padding: .5rem;
+    background: rgba(255,0,0,.8);
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+}

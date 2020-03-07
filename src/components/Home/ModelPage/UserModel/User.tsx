@@ -1,23 +1,26 @@
-import React from "react";
-import "./UserModel.scss";
-import { UserModel as DataModel, userModelKeys } from '../../../../types/UserModel'
-import { useConnect } from '../../../Utils/Connect'
+import React from 'react'
+import './UserModel.scss'
+import { DisplayUserModelKeys, displayUserModelKeys, UserModel, } from '../../../../types/UserModel'
 import { createToggleModalAction } from '../../../Actions/ModalActions'
 import { EditUserModalIdentifier } from '../../../Modals/EditUserModal/EditUserModal'
+import { useConnect } from '../../../Utils/useConnect'
 
 interface Props {
   spaced?: boolean
-  user: DataModel
+  user: UserModel
 }
 
-export const UserModel: React.FC<Props> = ({ spaced, user}) => {
-
-  const [,dispatch] = useConnect()
+export const User: React.FC<Props> = useConnect<Props>(({ spaced, user, dispatch }) => {
   const parseClassName = (): string => 'user' + (spaced? ' space-bottom' : '')
 
   return (
     <div className={parseClassName()} onClick={() => dispatch(createToggleModalAction(EditUserModalIdentifier, user))}>
-      {userModelKeys().map( key => <div>{user[key]}</div>)}
+      {displayUserModelKeys.map(key => {
+        const data = user[key]
+        return renderUser(data, key)
+      })}
     </div>
   );
-};
+})
+
+const renderUser = (data: string | number, key: DisplayUserModelKeys) => <div key={key}>{data}</div>

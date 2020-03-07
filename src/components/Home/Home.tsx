@@ -1,15 +1,32 @@
-import React from 'react'
-import { Role } from './Enums/Role'
+import React, { Suspense} from 'react'
+import { AdminHome } from './AdminHome/AdminHome'
+import { createResource, WrappedPromise } from '../../requests/Suspense'
+import { getCurrentUser } from '../../requests/Requests'
+import { UserModel } from '../../types/UserModel'
+import { createLoadUserAction } from '../Actions/DataActions'
+import { useConnect } from '../Utils/useConnect'
 
 interface Props {
-
+  resource: WrappedPromise<UserModel>
 }
 
-export const Home: React.FC<Props> = () => {
+const Component: React.FC<Props> = useConnect(({resource, state, dispatch}) => {
+  const { currentUser } = state
 
-    const role = localStorage.getItem('role')
+  if (!currentUser){
+    const data = resource.data.read()
+    data && dispatch(createLoadUserAction(data))
+  }
 
-    if(role === Role.ADMIN) return <div> ADMIN </div>
+  return (currentUser && currentUser.role)? <AdminHome/> : <div> OPERATOR </div>
+})
 
-    return <div> OPERATOR </div>
-} 
+export const HomeComponent: React.FC = () => {
+  const resource = React.useMemo(() => createResource<UserModel>( getCurrentUser )(), [])
+
+  return (
+    <Suspense fallback={<h1> Pauli... </h1>}>
+      <Component resource={resource}/>
+    </Suspense>
+  );
+}

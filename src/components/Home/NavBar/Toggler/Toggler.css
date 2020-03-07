@@ -1,0 +1,15 @@
+.toggler {
+    transform: rotate(90deg);
+    position: absolute;
+    top: 1.5rem;
+    right: -3rem;
+    background: var(--black);
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    cursor: pointer;
+}

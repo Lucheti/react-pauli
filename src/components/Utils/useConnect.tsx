@@ -13,6 +13,5 @@ interface Props {
 export const useConnect = <T extends any> (Component: React.FC<Props & T>): React.FC<T> => (props: any) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [state,dispatch] = React.useContext(AppContext)
-    // @ts-ignore
     return <Component state={state} dispatch={dispatch} {...props} />
 }

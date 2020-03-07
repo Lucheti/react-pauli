@@ -14,5 +14,10 @@
         border: none;
         outline: none;
         margin-top: 1rem;
+        transition: 1s;
+
+        &:disabled {
+            background: red;
+        }
     }
 }

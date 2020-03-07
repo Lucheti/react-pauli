@@ -1,0 +1,38 @@
+.button {
+  background: none;
+  outline: none;
+  border: none;
+  background: var(--light-blue);
+  color: white;
+  max-width: 1.5rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  box-shadow: 0 0 2px rgba(0,0,0,.5);
+  margin-bottom: .3rem;
+  transition: .5s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:before {
+    content: '+';
+  }
+
+
+  &:hover {
+    max-width: 10rem;
+    min-width: 5rem;
+    transition: .5s;
+    &:before {
+      content: 'Agregar usuario';
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .button {
+    &:hover {
+      max-width: initial;
+      min-width: initial;
+    }
+  }
+}

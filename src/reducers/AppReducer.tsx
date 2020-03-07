@@ -1,27 +1,35 @@
 import React from 'react'
-import { CHANGE_TAB, TOGGLE_NAVBAR } from '../Components/Actions/NavBarActions'
+import { Role } from '../components/Enums/Role'
+import { DisplayUserModel, UserModel } from '../types/UserModel'
+import { Tabber } from '../components/Utils/Tabber'
 
 export interface AppReducerState {
   navbarVisible: boolean
-  mainViewComponent: React.ComponentType
   modals: any
+  openTab: Tabber
+  forms: any
+  editingUser: UserModel
+  access_token: string
+  role: Role
+  currentUser?: UserModel //el logueado
 }
 
 export interface AppReducerAction {
-  type: string;
   payload?: any;
+  handler: (state: AppReducerState, action: AppReducerAction) => AppReducerState
 }
 
-export const AppReducer: React.Reducer<AppReducerState,AppReducerAction> = (state: AppReducerState, action: AppReducerAction) => {
-  switch (action.type) {
-    case TOGGLE_NAVBAR: return {...state, navbarVisible: !state.navbarVisible}
-    case CHANGE_TAB: return {...state, mainViewComponent: action.payload}
-    default: return state
-  }
-}
+export const AppReducer: React.Reducer<AppReducerState, AppReducerAction> = (
+  state: AppReducerState,
+  action: AppReducerAction
+) => action.handler(state, action)
 
 export const APP_REDUCER_INITIAL_STATE: AppReducerState = {
-  navbarVisible: false,
-  mainViewComponent: () => <div>asd</div>,
-  modals: {}
-}
+  navbarVisible: true,
+  modals: {},
+  forms: {},
+  editingUser: new UserModel(),
+  access_token: localStorage.getItem('token') || "",
+  role: Role.ADMIN,
+  openTab: new Tabber('operators-page')
+};
