@@ -3,12 +3,12 @@ import './NavBar.scss'
 import { NavItem } from './NavItem/NavItem'
 import { NavList } from './NavList/NavList'
 import { Toggler } from './Toggler/Toggler'
-import { changeTab, logout } from '../../Actions/NavBarActions'
+import { changeTab, logout } from '../../../Actions/NavBarActions'
 import { OperatorsPageId } from '../AdminHome/Operators/Operators'
 import { CoordinatorsPageId } from '../AdminHome/Coordinators/Coordinators'
 import { useConnect } from '../../Utils/useConnect'
 import { DatabasesPageId } from '../DatabaseLoader'
-import { showAlert } from '../../Actions/AlertActions'
+import { showAlert } from '../../../Actions/AlertActions'
 
 interface Props {}
 

@@ -1,5 +1,5 @@
-import { AppReducerAction, AppReducerState } from '../../reducers/AppReducer'
-import { DisplayUserModel, UserModel } from '../../types/UserModel'
+import { AppReducerAction, AppReducerState } from '../reducers/AppReducer'
+import { DisplayUserModel, UserModel } from '../types/UserModel'
 
 const handleToggleModal = (state: AppReducerState, action: AppReducerAction) => ({
   ...state,

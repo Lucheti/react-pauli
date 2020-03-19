@@ -3,11 +3,12 @@ import { AdminHome } from './AdminHome/AdminHome'
 import { createResource, WrappedPromise } from '../../requests/Suspense'
 import { getCurrentUser } from '../../requests/Requests'
 import { UserModel } from '../../types/UserModel'
-import { createLoadUserAction } from '../Actions/DataActions'
+import { createLoadUserAction } from '../../Actions/DataActions'
 import { useConnect } from '../Utils/useConnect'
 import { Alert } from '../Alert/Alert'
 import { Role } from '../Enums/Role'
 import { Redirect } from 'react-router'
+import { OperatorHome } from './OperatorHome/OperatorHome'
 
 export const HomeComponent: React.FC = () => {
 
@@ -33,7 +34,8 @@ const Component: React.FC<Props> = useConnect(({resource, state, dispatch}) => {
   }
   if (!currentUser) return null
   if(currentUser.role === Role.ADMIN) return <AdminHome/>
-  if(currentUser.role === Role.OPERATOR) return <div> OPERATOR </div>
+  if(currentUser.role === Role.OPERATOR) return <OperatorHome/>
   return <Redirect to={'/login'}/>
-
 })
+
+// return <OperatorHome/>

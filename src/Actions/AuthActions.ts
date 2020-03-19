@@ -1,4 +1,4 @@
-import { AppReducerAction, AppReducerState } from '../../reducers/AppReducer'
+import { AppReducerAction, AppReducerState } from '../reducers/AppReducer'
 
 export const LOGIN_SUCCESS = 'login success'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Modal.scss'
-import { createToggleModalAction } from '../Actions/ModalActions'
+import { createToggleModalAction } from '../../Actions/ModalActions'
 import { useConnect } from '../Utils/useConnect'
 
 interface Props {

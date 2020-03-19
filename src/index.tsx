@@ -5,12 +5,12 @@ import App from './App'
 import { initInterceptor } from './requests/Interceptor'
 import { APP_REDUCER_INITIAL_STATE, AppReducer, AppReducerAction, AppReducerState } from './reducers/AppReducer'
 
-initInterceptor()
 
 export const AppContext = React.createContext<[AppReducerState, React.Dispatch<AppReducerAction>]>([APP_REDUCER_INITIAL_STATE, () => APP_REDUCER_INITIAL_STATE])
 
 const AppContainer = () => {
   const reducer = React.useReducer(AppReducer, APP_REDUCER_INITIAL_STATE)
+  initInterceptor(reducer[1])
 
   return (
     <AppContext.Provider value={reducer}>

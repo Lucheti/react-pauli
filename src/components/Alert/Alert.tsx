@@ -1,7 +1,7 @@
 import React from 'react'
 import './Alert.scss'
 import { useConnect } from '../Utils/useConnect'
-import { hideAlert } from '../Actions/AlertActions'
+import { hideAlert } from '../../Actions/AlertActions'
 import { widthTransition } from '../Utils/StyleHooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'

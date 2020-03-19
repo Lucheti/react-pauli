@@ -1,7 +1,7 @@
 import React from 'react'
 import './UserModel.scss'
 import { DisplayUserModelKeys, displayUserModelKeys, UserModel, } from '../../../../types/UserModel'
-import { createToggleModalAction } from '../../../Actions/ModalActions'
+import { createToggleModalAction } from '../../../../Actions/ModalActions'
 import { EditUserModalIdentifier } from '../../../Modals/EditUserModal/EditUserModal'
 import { useConnect } from '../../../Utils/useConnect'
 

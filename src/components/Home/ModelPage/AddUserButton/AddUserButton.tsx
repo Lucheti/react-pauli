@@ -1,6 +1,6 @@
 import React from "react";
 import "./AddUserButton.scss";
-import { createToggleModalAction } from "../../../Actions/ModalActions";
+import { createToggleModalAction } from "../../../../Actions/ModalActions";
 import { AddUserModalIdentifier } from "../../../Modals/AddUserModal/AddUserModal";
 import { useConnect } from '../../../Utils/useConnect'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Toggler.css'
-import { toggleNavbar } from '../../../Actions/NavBarActions'
+import { toggleNavbar } from '../../../../Actions/NavBarActions'
 import { useConnect } from '../../../Utils/useConnect'
 
 interface Props {}

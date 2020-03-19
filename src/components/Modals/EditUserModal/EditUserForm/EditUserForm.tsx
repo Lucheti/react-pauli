@@ -1,7 +1,7 @@
 import React from 'react'
-import { createToggleModalAction } from '../../../Actions/ModalActions'
+import { createToggleModalAction } from '../../../../Actions/ModalActions'
 import { Form } from '../../../Form/Form'
-import { createUserModelKeysValidator, UserModel, userModelKeys } from '../../../../types/UserModel'
+import { userModelKeys } from '../../../../types/UserModel'
 import { useConnect } from '../../../Utils/useConnect'
 import { ModelPageContext } from '../../../Home/ModelPage/ModelPage'
 import { updateUser } from '../../../../requests/Requests'
@@ -34,7 +34,6 @@ export const EditUserForm: React.FC<Props> = useConnect<Props>(({ modalId, state
         handleSubmit={onSubmit}
         title={"Editar usuario"}
         initialValues={editingUser}
-        validators={createUserModelKeysValidator}
       />
     </div>
   );

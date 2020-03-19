@@ -1,12 +1,11 @@
 import fetchIntercept from 'fetch-intercept';
-import { useDispatch } from '../components/Utils/useConnect'
-import { showAlert } from '../components/Actions/AlertActions'
+import { AppReducerAction } from '../reducers/AppReducer'
 
 
-export const initInterceptor = () =>
+export const initInterceptor = (dispatch: React.Dispatch<AppReducerAction>) =>
 fetchIntercept.register({
   request: function (url, config) {
-    // debugger
+    console.log(dispatch)
     if (!config) config = {}
     let token = localStorage.getItem('token')
     token && (config.headers = {...config.headers, "Authorization": "Bearer " + token})

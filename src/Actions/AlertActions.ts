@@ -1,4 +1,4 @@
-import { AppReducerAction, AppReducerState } from '../../reducers/AppReducer'
+import { AppReducerAction, AppReducerState } from '../reducers/AppReducer'
 
 const handleHideAlert = (state: AppReducerState): AppReducerState => ({...state, alert: {...state.alert, alertVisible: false} })
 export const hideAlert = (): AppReducerAction => ({handler: handleHideAlert})

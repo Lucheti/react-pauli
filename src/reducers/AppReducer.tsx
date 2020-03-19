@@ -16,6 +16,7 @@ export interface AppReducerState {
     alertMessage: string;
     alertVisible: boolean
   }
+  isCalling: boolean
 }
 
 export interface AppReducerAction {
@@ -37,7 +38,8 @@ export const APP_REDUCER_INITIAL_STATE: AppReducerState = {
   role: Role.ADMIN,
   openTab: new Tabber('operators-page'),
   alert: {
-    alertMessage: 'some message',
-    alertVisible: true,
-  }
+    alertMessage: '',
+    alertVisible: false,
+  },
+  isCalling: false
 };

@@ -1,12 +1,11 @@
 import React from 'react'
 import './AddUserForm.sass'
-import { createToggleModalAction } from '../../../Actions/ModalActions'
+import { createToggleModalAction } from '../../../../Actions/ModalActions'
 import { Form } from '../../../Form/Form'
-import { createUserModelKeys, createUserModelKeysValidator } from '../../../../types/UserModel'
 import { useConnect } from '../../../Utils/useConnect'
-import { Role } from '../../../Enums/Role'
 import { addUser } from '../../../../requests/Requests'
 import { ModelPageContext } from '../../../Home/ModelPage/ModelPage'
+import { createUserModelKeys } from '../../../../types/UserModel'
 
 interface Props {
   modalId: string
@@ -29,7 +28,6 @@ export const AddUserForm: React.FC<Props> = useConnect(({modalId, dispatch}) => 
           inputList={createUserModelKeys}
           handleSubmit={ onSubmit }
           title={'Agregar usuario'}
-          validators={createUserModelKeysValidator}
         />
       </div>
     );

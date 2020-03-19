@@ -1,0 +1,14 @@
+.phone {
+  height: 13rem;
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  font-size: 7rem;
+
+  p {
+    margin: 0;
+  }
+}

@@ -1,0 +1,30 @@
+.cuotas-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  width: 80vw;
+
+  .cuota {
+    width: 30%;
+    margin: 1%;
+    padding: .5%;
+    min-height: 3rem;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    background: var(--light-blue);
+    color: white;
+    font-weight: bolder;
+    transition: .5s;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255,255,255,.8);
+      color: var(--light-blue);
+    }
+
+  }
+
+  .selected {
+    background: rgba(255,255,255,.8);
+    color: var(--light-blue);
+  }
+}

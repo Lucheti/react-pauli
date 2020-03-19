@@ -15,5 +15,3 @@ export const useConnect = <T extends any> (Component: React.FC<Props & T>): Reac
   const [state,dispatch] = React.useContext(AppContext)
     return <Component state={state} dispatch={dispatch} {...props} />
 }
-
-export const useDispatch = () => React.useContext(AppContext)[1]

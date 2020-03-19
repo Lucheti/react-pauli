@@ -2,7 +2,7 @@ import { LoginToken } from '../types/loginToken'
 import { createUserModelKeys, UserModel, userModelKeys } from '../types/UserModel'
 import { Role } from '../components/Enums/Role'
 
-const BASE_URL = (path?: string) => 'http://37c38a98.ngrok.io' + (path? path : "")
+const BASE_URL = (path?: string) => 'http://ec2-18-234-130-52.compute-1.amazonaws.com' + (path? path : "")
 
 const loginOptions = {
   method: 'POST',
@@ -19,7 +19,10 @@ export const login = (username: string, password: string): Promise<LoginToken> =
 export const getCurrentUser = (): Promise<UserModel> =>
   fetch(BASE_URL('/users/current'))
     .then(res => res.json())
-    .catch( console.log )
+    .catch( err => {
+      localStorage.clear()
+      console.log(err)
+    } )
 
 export const getUserByRole = (role: Role) =>
   fetch(BASE_URL('/users/all/' + role.toString() ))
