@@ -1,18 +1,41 @@
-import React from 'react'
-import { AddUserForm } from './AddUserForm/AddUserForm'
-import { Modal } from '../../Modal/Modal'
-import { Role } from '../../Enums/Role'
+import React from "react";
+import { Modal } from "../../Modal/Modal";
+import { UserForm } from "../../Forms/UserFrom";
+import { addUser } from "../../../requests/Requests";
+import { UserModel } from "../../../types/UserModel";
+import { createToggleModalAction } from "../../../Actions/ModalActions";
+import { useConnect } from "../../Utils/useConnect";
+import { Spinner } from "../../Spinner/Spinner";
+import { showAlert } from '../../../Actions/AlertActions'
 
 interface Props {
+  update: () => void;
 }
 
-export const AddUserModal: React.FC<Props> = () => {
+export const AddUserModal: React.FC<Props> = useConnect(
+  ({ update, dispatch }) => {
+    const [loading, setLoading] = React.useState(false);
+    const handleSubmit = (user: UserModel) => {
+      addUser(user).then(() => {
+        dispatch(createToggleModalAction(AddUserModalIdentifier));
+        setLoading(true);
+        update();
+      })
+        .catch(err => {
+            dispatch(showAlert('Algo salio mal'))
+            console.log(err)
+        });
+    };
 
-    return <div>
+    return (
+      <div>
         <Modal modalId={AddUserModalIdentifier}>
-            <AddUserForm modalId={AddUserModalIdentifier} />
+          {loading && <Spinner text={"Agregando..."} />}
+          {!loading && <UserForm onSubmit={handleSubmit} />}
         </Modal>
-    </div>
-}
+      </div>
+    );
+  }
+);
 
-export const AddUserModalIdentifier = 'add-user-modal'
+export const AddUserModalIdentifier = "add-user-modal";

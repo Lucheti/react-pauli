@@ -1,7 +1,9 @@
 import React from 'react'
 import { Role } from '../components/Enums/Role'
-import { DisplayUserModel, UserModel } from '../types/UserModel'
+import { UserModel } from '../types/UserModel'
 import { Tabber } from '../components/Utils/Tabber'
+import { loginFormId } from '../components/Forms/LoginForm'
+import { addUserForm } from '../components/Forms/UserFrom'
 
 export interface AppReducerState {
   navbarVisible: boolean
@@ -19,20 +21,30 @@ export interface AppReducerState {
   isCalling: boolean
 }
 
-export interface AppReducerAction {
-  payload?: any;
-  handler: (state: AppReducerState, action: AppReducerAction) => AppReducerState
+export type AppReducerAction <T = any> = AppReducerPayloadAction<T> | AppReducerPlainAction
+
+export interface AppReducerPayloadAction <T> {
+  payload: T;
+  handler: (state: AppReducerState, action: AppReducerPayloadAction<T>) => AppReducerState
+}
+export interface AppReducerPlainAction {
+  handler: (state: AppReducerState, action: AppReducerPlainAction) => AppReducerState
 }
 
 export const AppReducer: React.Reducer<AppReducerState, AppReducerAction> = (
   state: AppReducerState,
   action: AppReducerAction
-) => action.handler(state, action)
+) =>
+  // @ts-ignore
+  action.handler(state, action)
 
 export const APP_REDUCER_INITIAL_STATE: AppReducerState = {
   navbarVisible: true,
   modals: {},
-  forms: {},
+  forms: {
+    [loginFormId]: {},
+    [addUserForm]: {}
+  },
   editingUser: new UserModel(),
   access_token: localStorage.getItem('token') || "",
   role: Role.ADMIN,

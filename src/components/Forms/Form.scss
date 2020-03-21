@@ -21,3 +21,24 @@
     width: calc(21.5rem + 6px);
   }
 }
+
+.form-container {
+  padding: 2rem;
+  background: var(--black);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+
+  input[type='submit']{
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    background: var(--light-blue);
+    color: white;
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+
+    &:disabled {
+      background: red;
+    }
+  }
+}

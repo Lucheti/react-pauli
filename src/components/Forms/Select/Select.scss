@@ -1,0 +1,22 @@
+.datalist-container {
+  position: relative;
+  .datalist {
+    position: absolute;
+    background: white;
+    padding: 1rem;
+    width: 20rem;
+    p {
+      text-align: center;
+      margin: .25rem;
+      padding: .5rem;
+      transition: .5s;
+
+      &:hover {
+        background: var(--light-blue);
+        color: white;
+        transition: .5s;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { LoginToken } from '../types/loginToken'
-import { createUserModelKeys, UserModel, userModelKeys } from '../types/UserModel'
+import { CallCenter, UserModel, userModelKeys } from '../types/UserModel'
 import { Role } from '../components/Enums/Role'
 
-const BASE_URL = (path?: string) => 'http://ec2-18-234-130-52.compute-1.amazonaws.com' + (path? path : "")
+const BASE_URL = (path?: string) => 'http://8d582b29.ngrok.io' + (path? path : "")
 
 const loginOptions = {
   method: 'POST',
@@ -29,30 +29,25 @@ export const getUserByRole = (role: Role) =>
     .then(res => res.json())
     .catch( console.log )
 
-export const addUser = (role: Role, ...args: string[]) =>
-  fetch(BASE_URL('/users/' + role.toString()),{
+export const addUser = (user: UserModel) =>
+  fetch(BASE_URL('/users/OPERATOR'),{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(
-      createUserModelKeys.reduce( (acc , key, index) => ({...acc, [key]: args[index]}), {})
-    )
+    body: JSON.stringify(user)
   })
     .catch( console.log )
 
-export const updateUser = (...args: string[]) =>
+export const updateUser = (user: UserModel) =>
   fetch(BASE_URL('/users'),{
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(
-      userModelKeys.reduce( (acc , key, index) => ({...acc, [key]: args[index]}), {})
-    )
+    body: JSON.stringify(user)
   })
     .catch( console.log )
-
 
 
 export const uploadDatabase = (multipartFile: any) =>
@@ -60,4 +55,9 @@ export const uploadDatabase = (multipartFile: any) =>
     method: 'POST',
     body: multipartFile
   }).then( console.log, console.log )
+    .catch( console.log )
+
+export const getCallcenters = (): Promise<CallCenter[]> =>
+  fetch(BASE_URL('/users/callCenter'))
+    .then(res => res.json())
     .catch( console.log )

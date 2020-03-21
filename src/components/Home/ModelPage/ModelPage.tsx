@@ -18,14 +18,11 @@ interface Props {
   role: Role
 }
 
-export const ModelPageContext = React.createContext<any>({})
-
 const ModelPage: React.FC<Props> = ({ title, fetcher, role }) => {
   const [shouldUpdate, update] = useCounter()
   const resource = React.useMemo(() => createResource<UserModel[]>( () => fetcher(role) )(), [shouldUpdate])
 
   return (
-    <ModelPageContext.Provider value={{update, role}}>
     <div className="users">
 
       <div className={"title-container"}>
@@ -36,11 +33,10 @@ const ModelPage: React.FC<Props> = ({ title, fetcher, role }) => {
         <UserList resource={resource}/>
       </Suspense>
 
-        <AddUserModal/>
+        <AddUserModal update={update}/>
 
-        <EditUserModal/>
+        <EditUserModal update={update}/>
     </div>
-    </ModelPageContext.Provider>
   );
 };
 
