@@ -2,7 +2,7 @@ import { LoginToken } from '../types/loginToken'
 import { createUserModelKeys, UserModel, userModelKeys } from '../types/UserModel'
 import { Role } from '../components/Enums/Role'
 
-const BASE_URL = (path?: string) => 'http://ec2-18-234-130-52.compute-1.amazonaws.com' + (path? path : "")
+const BASE_URL = (path?: string) => 'http://localhost:8080' + (path? path : "")
 
 const loginOptions = {
   method: 'POST',
