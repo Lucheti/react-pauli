@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from '../../Modal/Modal'
-import { UserForm } from '../../Forms/UserFrom'
+import { UserForm } from '../../Forms/UserForm'
 import { UserModel } from '../../../types/UserModel'
 import { addUser, updateUser } from '../../../requests/Requests'
 import { createToggleModalAction } from '../../../Actions/ModalActions'

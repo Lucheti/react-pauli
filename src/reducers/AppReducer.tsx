@@ -2,14 +2,22 @@ import React from 'react'
 import { Role } from '../components/Enums/Role'
 import { UserModel } from '../types/UserModel'
 import { Tabber } from '../components/Utils/Tabber'
-import { loginFormId } from '../components/Forms/LoginForm'
-import { addUserForm } from '../components/Forms/UserFrom'
+import { LoginFormId } from '../components/Forms/LoginForm'
+import { AddUserFormId } from '../components/Forms/UserForm'
+import { DefaultLoginFormState, LoginFormState } from '../States/FormStates/LoginFormState'
+import { AddUserFormState, DefaultAddUserFormState } from '../States/FormStates/AddUserFormState'
+import { DefaultSurveyFormState, SurveyFormState } from '../States/FormStates/SurveyFormState'
+import { SurveyFormId } from '../components/Home/AdminHome/SurveyPage/Constants'
 
 export interface AppReducerState {
   navbarVisible: boolean
   modals: any
   openTab: Tabber
-  forms: any
+  forms: {
+    [LoginFormId]: LoginFormState,
+    [AddUserFormId]: AddUserFormState,
+    [SurveyFormId]: SurveyFormState,
+  }
   editingUser: UserModel
   access_token: string
   role: Role
@@ -19,6 +27,10 @@ export interface AppReducerState {
     alertVisible: boolean
   }
   isCalling: boolean
+  dragInfo: {
+    elem: any
+    handler: () => void
+  }
 }
 
 export type AppReducerAction <T = any> = AppReducerPayloadAction<T> | AppReducerPlainAction
@@ -42,8 +54,9 @@ export const APP_REDUCER_INITIAL_STATE: AppReducerState = {
   navbarVisible: true,
   modals: {},
   forms: {
-    [loginFormId]: {},
-    [addUserForm]: {}
+    [LoginFormId]: DefaultLoginFormState,
+    [AddUserFormId]: DefaultAddUserFormState,
+    [SurveyFormId]: DefaultSurveyFormState,
   },
   editingUser: new UserModel(),
   access_token: localStorage.getItem('token') || "",
@@ -53,5 +66,9 @@ export const APP_REDUCER_INITIAL_STATE: AppReducerState = {
     alertMessage: '',
     alertVisible: false,
   },
-  isCalling: false
+  isCalling: false,
+  dragInfo: {
+    elem: {},
+    handler: () => {},
+  }
 };

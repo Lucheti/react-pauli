@@ -2,7 +2,7 @@ import { LoginToken } from '../types/loginToken'
 import { CallCenter, UserModel, userModelKeys } from '../types/UserModel'
 import { Role } from '../components/Enums/Role'
 
-const BASE_URL = (path?: string) => 'http://8d582b29.ngrok.io' + (path? path : "")
+const BASE_URL = (path?: string) => 'http://ea226ea2.ngrok.io' + (path? path : "")
 
 const loginOptions = {
   method: 'POST',
@@ -58,6 +58,6 @@ export const uploadDatabase = (multipartFile: any) =>
     .catch( console.log )
 
 export const getCallcenters = (): Promise<CallCenter[]> =>
-  fetch(BASE_URL('/users/callCenter'))
+  fetch(BASE_URL('/callCenters'))
     .then(res => res.json())
     .catch( console.log )

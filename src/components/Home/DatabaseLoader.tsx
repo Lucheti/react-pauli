@@ -1,35 +1,27 @@
-import React from 'react'
-import { useConnect } from '../Utils/useConnect'
-import { uploadDatabase } from '../../requests/Requests'
+import React from "react";
+import { useConnect } from "../Utils/useConnect";
+import { uploadDatabase } from "../../requests/Requests";
 // import './DatabaseLoader.css'
 
-interface Props {
+interface Props {}
 
-}
+export const DatabaseLoader: React.FC<Props> = useConnect(({ state }) => {
+  const { openTab } = state;
+  if (openTab.identifier !== DatabasesPageId) return null;
 
-export const DatabaseLoader: React.FC<Props> = useConnect(({state}) => {
-    const { openTab } = state
-    const [file, setFile] = React.useState<FormData>()
+  const formRef = React.createRef<HTMLFormElement>();
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const data = new FormData(formRef.current!);
+    uploadDatabase(data).then( console.log, console.log ).catch( console.log )
+  };
 
-    React.useEffect(() => console.log(file), [file])
+  return (
+    <form encType={"multipart/form-data"} onSubmit={handleSubmit} ref={formRef}>
+      <input type={"file"} accept=".csv,.xls,.xlsx" />
+      <input type="submit" value={"Upload"} />
+    </form>
+  );
+});
 
-    const handleChange = (evt: React.FormEvent<HTMLInputElement>) => {
-      evt.preventDefault()
-      const formData = new FormData()
-      debugger
-      // @ts-ignore
-      formData.append('file', evt.target.files[0])
-      uploadDatabase( formData )
-    }
-
-
-    if(openTab.identifier !== DatabasesPageId) return null
-    return (
-      <div>
-          <input type={'file'} accept=".csv,.xls,.xlsx" onChange={ handleChange }/>
-          <input type="submit" value={'Upload'}/>
-      </div>
-    )
-})
-
-export const DatabasesPageId = 'databases-page'
+export const DatabasesPageId = "databases-page";

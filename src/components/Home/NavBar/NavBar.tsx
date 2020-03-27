@@ -9,6 +9,8 @@ import { CoordinatorsPageId } from '../AdminHome/Coordinators/Coordinators'
 import { useConnect } from '../../Utils/useConnect'
 import { DatabasesPageId } from '../DatabaseLoader'
 import { showAlert } from '../../../Actions/AlertActions'
+import { SurveyPageId } from '../AdminHome/SurveyPage/Constants'
+import { CallcentersPageId } from '../AdminHome/Callcenters/Callcenters'
 
 interface Props {}
 
@@ -31,8 +33,8 @@ export const NavBar: React.FC<Props> = useConnect(({state, dispatch}) => {
           <NavItem text={"Coordinadores"} onClick={() => dispatch(changeTab(CoordinatorsPageId))}/>
         </NavList>
         <NavItem text={"Bases Telefonicas"} onClick={() => dispatch(changeTab(DatabasesPageId))}/>
-        <NavItem text={"Call Centers"} />
-        <NavItem text={"Campos"} />
+        <NavItem text={"Call Centers"} onClick={() => dispatch(changeTab(CallcentersPageId))}/>
+        <NavItem text={"Campos"} onClick={() => dispatch(changeTab(SurveyPageId))}/>
         <NavItem text={"Cerrar Sesión"} onClick={() => dispatch(logout())} className={'logout'}/>
       </NavList>
     </div>

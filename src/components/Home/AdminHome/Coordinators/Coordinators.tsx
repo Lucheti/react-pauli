@@ -8,7 +8,7 @@ export const Coordinator = useConnect(({state}) => {
 
   const { openTab } = state
 
-  if(openTab.identifier === CoordinatorsPageId) return <ModelPage title={'Coordinadores'} fetcher={  getUserByRole } role={Role.COORDINATOR}/>
+  if(openTab.identifier === CoordinatorsPageId) return <ModelPage title={'Coordinadores'} role={Role.COORDINATOR}/>
   else return null
 })
 

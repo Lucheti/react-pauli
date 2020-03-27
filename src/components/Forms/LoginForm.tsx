@@ -1,6 +1,6 @@
 import React from "react";
 import { useConnect } from "../Utils/useConnect";
-import { changeInput } from "../../Actions/FornActions";
+import { changeInput } from "../../Actions/FormActions";
 import "./Form.scss";
 
 interface Props {
@@ -9,10 +9,10 @@ interface Props {
 
 export const LoginForm: React.FC<Props> = useConnect(({ dispatch, state, onSubmit }) => {
   const { forms } = state;
-  const formData = forms[loginFormId]
+  const formData = forms[LoginFormId]
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(changeInput(loginFormId, target.name, target.value));
+    dispatch(changeInput(LoginFormId, target.name, target.value));
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     onSubmit(formData.username, formData.password)
@@ -44,4 +44,4 @@ export const LoginForm: React.FC<Props> = useConnect(({ dispatch, state, onSubmi
   );
 });
 
-export const loginFormId = "LOGIN_FORM_ID_";
+export const LoginFormId = "LOGIN_FORM_ID_";

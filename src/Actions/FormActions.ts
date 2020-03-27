@@ -1,10 +1,11 @@
 import { AppReducerPayloadAction, AppReducerState } from '../reducers/AppReducer'
+import { FormIdentifier } from '../types/FormIdentifier'
 
 
 interface InputChangePayload {
   inputName: string,
   inputValue: string
-  formId: string
+  formId: FormIdentifier
 }
 const handleInputChange = (state: AppReducerState, action: AppReducerPayloadAction<InputChangePayload>): AppReducerState =>
   ({...state,
@@ -16,4 +17,4 @@ const handleInputChange = (state: AppReducerState, action: AppReducerPayloadActi
       }
     }
   })
-export const changeInput = (formId: string, inputName: string, value: string): AppReducerPayloadAction<InputChangePayload> => ({ handler: handleInputChange , payload: {inputName: inputName, inputValue: value, formId: formId}})
+export const changeInput = (formId: FormIdentifier, inputName: string, value: any): AppReducerPayloadAction<InputChangePayload> => ({ handler: handleInputChange , payload: {inputName: inputName, inputValue: value, formId: formId}})

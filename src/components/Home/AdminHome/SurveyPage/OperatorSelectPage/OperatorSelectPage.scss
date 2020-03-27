@@ -1,0 +1,18 @@
+.operator-select-page {
+  justify-content: space-around;
+
+  .selector-container{
+    display: flex;
+    justify-content: space-around;
+
+    .list-container {
+      width: 40vw;
+      padding: 1rem;
+      box-shadow: 0 0 5px rgba(0,0,0,.5);
+
+      &.dropable {
+        background: rgba(0,0,0,.2);
+      }
+    }
+  }
+}
