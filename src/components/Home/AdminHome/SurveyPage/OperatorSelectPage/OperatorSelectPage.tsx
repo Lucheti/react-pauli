@@ -16,7 +16,8 @@ interface Props {
   stage: string;
 }
 
-const selectedOperatorsFilter = (selectedOperators: UserModel[]) => (data: UserModel[]) => data.filter( user => !selectedOperators.find( operator => user.id === operator.id))
+const selectedOperatorsFilter = (selectedOperators: UserModel[]) => (data: UserModel[]) =>
+  data.filter( user => !selectedOperators.find( operator => user.id === operator.id))
 
 export const OperatorSelectPage: React.FC<Props> = useConnect<Props>(
   ({ stage, dispatch, state, children }) => {
@@ -33,6 +34,7 @@ export const OperatorSelectPage: React.FC<Props> = useConnect<Props>(
       <div className={"operator-select-page"}>
         <Title title={"Seleccion de operadores"}>{children}</Title>
         <div className={"selector-container"}>
+
           <Suspense fallback={<Spinner />}>
             <div className={"list-container"}>
               <UserList resource={resource} filter={ selectedOperatorsFilter(selectedOperators) } />
@@ -44,6 +46,7 @@ export const OperatorSelectPage: React.FC<Props> = useConnect<Props>(
               />
             </div>
           </Suspense>
+
         </div>
       </div>
     );

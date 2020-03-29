@@ -54,10 +54,10 @@ export const useDragAndDrop = <T extends unknown>( data: T[] , setData: Dispatch
 
   const onDragEnd = (draggedElem: T) => setData(data?.filter(elem => !equals(draggedElem, elem)));
 
-  const handleDrop = () => {
-    if (!data?.find(user => equals(user, elem))){
-      handler()
-      setData([...data!, elem]);
+  const handleDrop = async () => {
+    if (!data?.find(user => equals(user, elem))) {
+      await handler()
+      await setData([...data!, elem]);
     }
   };
 

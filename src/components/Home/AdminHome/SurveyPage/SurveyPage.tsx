@@ -6,6 +6,7 @@ import { SurveyFormId, SurveyPageId } from './Constants'
 import { useConnect } from '../../../Utils/useConnect'
 import { changeInput } from '../../../../Actions/FormActions'
 import { Title } from '../../../Title/Title'
+import { DatabaseSelectPage } from './DatabaseSelectPage/DatabaseSelectPage'
 
 interface Props {
 
@@ -25,9 +26,11 @@ export const SurveyPage: React.FC<Props> = useConnect(({state, dispatch}) => {
     return (
       <div className={'surveyPage'}>
         <Title title={'Campos'}/>
-        <OperatorSelectPage stage={stage}>
+        <OperatorSelectPage stage={ stage }>
           <SurveyStageButton/>
         </OperatorSelectPage>
+
+        <DatabaseSelectPage stage={ stage }/>
       </div>
     );
 })

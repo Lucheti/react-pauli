@@ -18,7 +18,7 @@ export const UserListItem: React.FC<Props> = useConnect(({ spaced, user, onDrag,
   const handleClick = editable? () => dispatch(createToggleModalAction(EditUserModalIdentifier, user)) : () => {}
 
   return (
-    <div className={parseClassName()} onClick={ handleClick } onDrag={ () => dragHandler(user) } draggable>
+    <div className={parseClassName()} onClick={ handleClick } onDrag={ () => dragHandler(user) } onDragEnd={ console.log } draggable>
       {displayUserModelKeys.map(key => {
         const data = user[key]
         return renderUser(data, key)
