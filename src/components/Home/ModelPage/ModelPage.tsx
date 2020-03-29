@@ -1,46 +1,39 @@
-import React, { memo, Suspense } from 'react'
-// @ts-ignore
-import { DisplayUserModel, UserModel, UserModel as Model } from '../../../types/UserModel'
-import "./ModelPage.scss";
+import React, { Suspense } from 'react'
+import { UserModel } from '../../../types/UserModel'
+import './ModelPage.scss'
 import { AddUserModal } from '../../Modals/AddUserModal/AddUserModal'
 import { AddUserButton } from './AddUserButton/AddUserButton'
 import { EditUserModal } from '../../Modals/EditUserModal/EditUserModal'
 import { createResource } from '../../../requests/Suspense'
 import { Spinner } from '../../Spinner/Spinner'
-import { UserList } from './DataList/UserList'
-import { useConnect } from '../../Utils/useConnect'
+import { UserList } from '../../Lists/User/UserList/UserList'
 import { Role } from '../../Enums/Role'
 import { useCounter } from '../../Utils/CustomHooks'
+import { getUserByRole } from '../../../requests/Requests'
+import { Title } from '../../Title/Title'
 
 interface Props {
   title: string;
-  fetcher: (role: Role) => Promise<UserModel[]>
   role: Role
 }
 
-export const ModelPageContext = React.createContext<any>({})
-
-const ModelPage: React.FC<Props> = ({ title, fetcher, role }) => {
+const ModelPage: React.FC<Props> = ({ title, role }) => {
   const [shouldUpdate, update] = useCounter()
-  const resource = React.useMemo(() => createResource<UserModel[]>( () => fetcher(role) )(), [shouldUpdate])
+  const resource = React.useMemo(() => createResource<UserModel[]>( () => getUserByRole(role) )(), [shouldUpdate])
 
   return (
-    <ModelPageContext.Provider value={{update, role}}>
     <div className="users">
-
-      <div className={"title-container"}>
-        <h3 className={"title"}>{title}</h3>
+      <Title title={title}>
         <AddUserButton/>
-      </div>
+      </Title>
       <Suspense fallback={<Spinner/>}>
-        <UserList resource={resource}/>
+        <UserList resource={resource} editable />
       </Suspense>
 
-        <AddUserModal/>
+        <AddUserModal update={update}/>
 
-        <EditUserModal/>
+        <EditUserModal update={update}/>
     </div>
-    </ModelPageContext.Provider>
   );
 };
 

@@ -1,0 +1,21 @@
+.survey-button {
+  background: none;
+  outline: none;
+  border: none;
+  background: var(--light-blue);
+  color: white;
+  box-shadow: 0 0 2px rgba(0,0,0,.5);
+  margin-bottom: .3rem;
+  transition: .5s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 2rem;
+  font-size: .9rem;
+
+  &:hover {
+    transition: .5s;
+    color: var(--light-blue);
+    background: white;
+  }
+}
