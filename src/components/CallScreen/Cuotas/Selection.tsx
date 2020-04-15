@@ -1,15 +1,23 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import "./Cuotas.scss";
 
-interface Props {}
+interface Props {
+  data: string[]
+  onChange: (value: string) => void
+}
 
-export const Selection: React.FC<Props> = () => {
+export const Selection: React.FC<Props> = ({data, onChange}) => {
   const [selected, setSelected] = React.useState(-1);
+
+  const handleChange = (index: number) => {
+    setSelected(index)
+    data && onChange(data[index])
+  }
 
   return (
     <div className={"cuotas-container"}>
-      {[1, 2, 3, 4, 5, 6].map(i => (
-        <Option i={i} onClick={setSelected} selected={selected} />
+      {data && data.map((value, index) => (
+        <Option i={index} onClick={handleChange} selected={selected} value={value}/>
       ))}
     </div>
   );
@@ -17,18 +25,18 @@ export const Selection: React.FC<Props> = () => {
 
 interface CuotaProps {
   i: number;
-  onClick: Dispatch<SetStateAction<number>>;
+  onClick: (i: number) => void;
   selected: number;
+  value: string
 }
 
-const Option: React.FC<CuotaProps> = ({ i, onClick, selected }) => (
+const Option: React.FC<CuotaProps> = ({ i, onClick, selected, value }) => (
   <div
     onClick={() => onClick(i)}
     className={"cuota " + (selected === i && "selected")}
   >
     <p>
-      {i % 2 === 0 ? "mujeres" : "hombres"}
-      {i}
+      {value}
     </p>
   </div>
 );

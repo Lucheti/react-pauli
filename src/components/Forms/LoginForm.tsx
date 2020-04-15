@@ -1,7 +1,8 @@
-import React from "react";
-import { useConnect } from "../Utils/useConnect";
-import { changeInput } from "../../Actions/FormActions";
-import "./Form.scss";
+import React from 'react'
+import { useConnect } from '../Utils/useConnect'
+import { changeInput } from '../../Actions/FormActions'
+import './Form.scss'
+import { LoginFormId } from './constants'
 
 interface Props {
     onSubmit: (username: string, password: string) => void
@@ -20,6 +21,7 @@ export const LoginForm: React.FC<Props> = useConnect(({ dispatch, state, onSubmi
 
   return (
     <div className={'form-container'}>
+      <h3 className={'title'}> Entrar </h3>
       <form onSubmit={handleSubmit}>
         <div className={"input-container"}>
           <input
@@ -43,5 +45,3 @@ export const LoginForm: React.FC<Props> = useConnect(({ dispatch, state, onSubmi
     </div>
   );
 });
-
-export const LoginFormId = "LOGIN_FORM_ID_";

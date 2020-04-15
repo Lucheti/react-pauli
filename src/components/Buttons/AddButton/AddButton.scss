@@ -1,4 +1,4 @@
-.button {
+.addButton {
   background: none;
   outline: none;
   border: none;
@@ -9,7 +9,7 @@
   height: 1.5rem;
   box-shadow: 0 0 2px rgba(0,0,0,.5);
   margin-bottom: .3rem;
-  transition: .5s;
+  transition: .75s;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -21,9 +21,9 @@
   &:hover {
     max-width: 10rem;
     min-width: 5rem;
-    transition: .5s;
+    transition: .75s;
     &:before {
-      content: 'Agregar usuario';
+      content: 'Agregar';
     }
   }
 }

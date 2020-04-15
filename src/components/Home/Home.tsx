@@ -29,7 +29,6 @@ const Component: React.FC<Props> = useConnect(({resource, state, dispatch}) => {
   const { currentUser } = state
 
   if (!currentUser){
-    debugger
     const data = resource.data.read()
     data && dispatch(createLoadUserAction(data))
   }

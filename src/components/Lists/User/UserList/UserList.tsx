@@ -26,13 +26,17 @@ export const UserList: React.FC<Props> = ({
   );
 
   React.useEffect(() => {
-    if (data && filter !== defaultFilter) {
+    // @ts-ignore
+    if (data && !data?.error && filter !== defaultFilter) {
       const filteredData = filter(data);
       if (!data.reduce( (acc, elem) => acc && !!filteredData.find( elem2 => elem.id === elem2.id) , true)) {
         setData(filteredData);
       }
     }
   }, [data]);
+
+  // @ts-ignore
+  if (data?.error) return <h1 className={'error'}>Ha habido un error, chequee su conexion a internet</h1>
 
   return (
     <div
@@ -41,7 +45,7 @@ export const UserList: React.FC<Props> = ({
       onDragOver={evt => evt.preventDefault()}
     >
       {data &&
-        data.map((user: UserModel, i: number) => (
+        data?.map((user: UserModel, i: number) => (
           <UserListItem
             key={user.mail + i}
             user={user}

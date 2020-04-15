@@ -23,8 +23,8 @@ export const Input: React.FC<Props & React.InputHTMLAttributes<HTMLInputElement>
       <div className={"input-container"}>
         {dirty && !isValid && <p className={'error'}> {errorMessage} </p>}
         <input
-          className={"formInput"}
           {...props}
+          className={"formInput " + (props.className || "")}
           onChange={ onChange }
         />
       </div>

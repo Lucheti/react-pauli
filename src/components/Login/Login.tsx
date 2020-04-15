@@ -28,7 +28,7 @@ export const LoginPage: React.FC<Props> = useConnect<Props>(({resource, state, d
 
   return (
   <>
-      {/*{result?.error && <p className='error'> Ha habido un error mientras intentabas ingresar, porfavor revise las credenciales e intente nuevamente</p>}*/}
+      {result?.error && <p className='error'> Ha habido un error mientras intentabas ingresar, porfavor revise las credenciales e intente nuevamente</p>}
       <LoginForm onSubmit={handleLogin}/>
   </>
 )})

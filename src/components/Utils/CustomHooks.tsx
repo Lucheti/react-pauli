@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { createResource, WrappedPromise } from '../../requests/Suspense'
-import { AppContext } from '../../index'
 import { UserModel } from '../../types/UserModel'
 import { dragElement } from '../../Actions/DragAndDropActions'
+import { AppContext } from '../../constants'
 
 export const useBoolean = (defaultValue: boolean = false): [boolean, () => void] => {
   const [state, set] = React.useState(defaultValue)

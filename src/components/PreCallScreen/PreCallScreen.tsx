@@ -1,35 +1,57 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useMoreInfo } from '../Utils/StyleHooks'
-import { useBoolean } from '../Utils/CustomHooks'
+import { useBoolean, useGetResource } from '../Utils/CustomHooks'
 import './PreCallScreen.scss'
 import { useConnect } from '../Utils/useConnect'
-import { toggleCalling } from '../../Actions/OperatorActions'
+import { setSurvey, toggleCalling } from '../../Actions/OperatorActions'
+import { getMySurveys } from '../../requests/Requests'
+import { WrappedPromise } from '../../requests/Suspense'
+import { Survey } from '../../types/Survey'
+import { Spinner } from '../Spinner/Spinner'
+import { OperatorPageId } from '../Home/OperatorHome/Constants'
 
 interface Props {
 }
 
 export const PreCallScreen: React.FC<Props> = useConnect<Props>(({dispatch, state}) => {
 
-    return (
-      <div className={'pre-call-screen'}>
-        <Dropdown options={['campo1']}/>
-        <button className={"start"} onClick={() => dispatch(toggleCalling())}> Iniciar </button>
-      </div>
-    );
+  const { isCalling } = state[OperatorPageId]
+
+  if(isCalling) return null
+
+  const resource = useGetResource(getMySurveys)
+  return (
+    <div className={'pre-call-screen'}>
+      <h1> Pauli </h1>
+      <Suspense fallback={<Spinner/>}>
+        <SurveyDropdown resource={resource}/>
+      </Suspense>
+      <button className={"start"} onClick={() => dispatch(toggleCalling())}> Iniciar</button>
+    </div>
+  );
 })
 
 interface DropdownProps {
-  options: any[]
+  resource: WrappedPromise<Survey[]>
 }
 
-const Dropdown: React.FC<DropdownProps> = ({options}) => {
+const SurveyDropdown: React.FC<DropdownProps> = useConnect(({resource, dispatch}) => {
   const [boolean, toggle] = useBoolean()
+
+  const data = resource.data.read()
+  const handleInputChange = (surveyName: string) => {
+    if (data){
+      const survey: Survey | undefined = data.find( survey => survey.name === surveyName)
+      survey && dispatch(setSurvey(survey))
+    }
+  }
+
   return(
     <div className={"dropdown-container"}>
-      <input list={'options'} onClick={toggle} placeholder={'Seleccionar Campo'}/>
+      <input list={'options'} onClick={toggle} placeholder={'Seleccionar Campo'} onChange={ evt => handleInputChange(evt.target.value) }/>
       <datalist id={'options'} style={useMoreInfo(boolean)}>
-        {options.map( (value) => <option value={value}/>)}
+        {data && data.map( (survey) => <option value={survey.name}/>)}
       </datalist>
     </div>
   )
-}
+})

@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker'
 import App from './App'
 import { initInterceptor } from './requests/Interceptor'
-import { APP_REDUCER_INITIAL_STATE, AppReducer, AppReducerAction, AppReducerState } from './reducers/AppReducer'
+import { APP_REDUCER_INITIAL_STATE, AppReducer } from './reducers/AppReducer'
+import { AppContext } from './constants'
 
-
-export const AppContext = React.createContext<[AppReducerState, React.Dispatch<AppReducerAction>]>([APP_REDUCER_INITIAL_STATE, () => APP_REDUCER_INITIAL_STATE])
 
 const AppContainer = () => {
   const reducer = React.useReducer(AppReducer, APP_REDUCER_INITIAL_STATE)
@@ -14,7 +13,7 @@ const AppContainer = () => {
 
   return (
     <AppContext.Provider value={reducer}>
-      <App />
+      {reducer && <App />}
     </AppContext.Provider>
   )
 }

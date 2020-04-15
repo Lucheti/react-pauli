@@ -1,0 +1,72 @@
+.cuota-container {
+  padding: 3rem;
+  max-width: 90%;
+  display: flex;
+  align-items: center;
+
+  .cuota {
+    display: flex;
+    padding: 1rem;
+    margin-right: 1rem;
+    justify-content: center;
+    box-shadow: 0 0 3px rgba(0,0,0,.65);
+    border-radius: 2rem;
+
+    .values {
+      padding: 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .total-value, .town {
+        padding: .5rem 1rem;
+        border: none;
+        border-bottom: 2px solid rgba(0,0,0,.4);
+        outline: none;
+      }
+    }
+
+    .segments {
+      padding: 1rem 2rem;
+      display: flex;
+
+      .segment {
+        display: flex;
+        flex-direction: column;
+        padding: 0 2rem;
+
+        .input-wrapper {
+          display: flex;
+
+          > * {
+            padding: 0 .5rem;
+          }
+
+          .segment-input {
+            padding: .5rem;
+            border: none;
+            border-bottom: 2px solid rgba(0,0,0,.4);
+            outline: none;
+          }
+
+          .segment-section {
+            padding: .5rem;
+            border: 2px solid rgba(0,0,0,.1);
+          }
+        }
+
+        .gender {
+          margin: 0;
+          padding: .5rem;
+          background: var(--light-blue);
+          color: white;
+          box-shadow: 0 0 2px rgba(0,0,0,.5);
+        }
+      }
+    }
+  }
+
+  .icon {
+    color: red;
+  }
+}

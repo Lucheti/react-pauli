@@ -2,7 +2,7 @@ import React from 'react'
 import { NavBar } from '../NavBar/NavBar'
 import { Operators } from './Operators/Operators'
 import { Coordinator } from './Coordinators/Coordinators'
-import { DatabaseLoader } from '../DatabaseLoader'
+import { DatabasePage } from './Databases/DatabasePage'
 import { SurveyPage } from './SurveyPage/SurveyPage'
 import { Callcenters } from './Callcenters/Callcenters'
 
@@ -17,7 +17,7 @@ export const AdminHome: React.FC<Props> = () => {
       <NavBar/>
       <Operators/>
       <Coordinator/>
-      <DatabaseLoader/>
+      <DatabasePage/>
       <Callcenters/>
       <SurveyPage/>
     </div>

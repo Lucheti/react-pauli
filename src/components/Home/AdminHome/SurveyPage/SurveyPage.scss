@@ -1,4 +1,12 @@
 .surveyPage{
-  padding: 5rem;
+  padding: 5rem 8rem;
 
+  .create-survey-form {
+    display: flex;
+    align-items: center;
+
+    .stage-container {
+      width: 100%;
+    }
+  }
 }

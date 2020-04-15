@@ -1,12 +1,13 @@
-import React from "react";
-import { Modal } from "../../Modal/Modal";
-import { UserForm } from "../../Forms/UserForm";
-import { addUser } from "../../../requests/Requests";
-import { UserModel } from "../../../types/UserModel";
-import { createToggleModalAction } from "../../../Actions/ModalActions";
-import { useConnect } from "../../Utils/useConnect";
-import { Spinner } from "../../Spinner/Spinner";
+import React from 'react'
+import { Modal } from '../../Modal/Modal'
+import { UserForm } from '../../Forms/UserForm'
+import { addUser } from '../../../requests/Requests'
+import { UserModel } from '../../../types/UserModel'
+import { createToggleModalAction } from '../../../Actions/ModalActions'
+import { useConnect } from '../../Utils/useConnect'
+import { Spinner } from '../../Spinner/Spinner'
 import { showAlert } from '../../../Actions/AlertActions'
+import { AddUserModalIdentifier } from '../constants'
 
 interface Props {
   update: () => void;
@@ -22,7 +23,7 @@ export const AddUserModal: React.FC<Props> = useConnect(
         update();
       })
         .catch(err => {
-            dispatch(showAlert('Algo salio mal'))
+            dispatch(showAlert('Algo salio mal:'))
             console.log(err)
         });
     };
@@ -38,4 +39,3 @@ export const AddUserModal: React.FC<Props> = useConnect(
   }
 );
 
-export const AddUserModalIdentifier = "add-user-modal";

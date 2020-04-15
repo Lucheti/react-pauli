@@ -1,17 +1,20 @@
 import { AppReducerAction, AppReducerPayloadAction, AppReducerState } from '../reducers/AppReducer'
 import { UserModel } from '../types/UserModel'
+import { ModalIdentifier } from '../types/ModalIdentifier'
 
-interface ModalActionPayload {
-  name: string
-  user?: UserModel
+interface ModalActionPayload<T> {
+  identifier: ModalIdentifier
+  elem?: T
 }
 
-const handleToggleModal = (state: AppReducerState, action: AppReducerPayloadAction<ModalActionPayload>) => ({
+const handleToggleModal = <T> (state: AppReducerState, action: AppReducerPayloadAction<ModalActionPayload<T>>) => ({
   ...state,
   modals: {
     ...state.modals,
-    [action.payload.name]: !state.modals[action.payload.name]
+    [action.payload.identifier]: {
+      isOpen: !(state.modals[action.payload.identifier].isOpen),
+      elem: action.payload.elem
+    }
   },
-  editingUser: action.payload.user || new UserModel()
 })
-export const createToggleModalAction = (name: string, user?: UserModel): AppReducerPayloadAction<ModalActionPayload> => ({ payload: { name: name, user: user}, handler: handleToggleModal})
+export const createToggleModalAction = <T> (name: ModalIdentifier, elem?: T): AppReducerPayloadAction<ModalActionPayload<T>> => ({ payload: { identifier: name, elem: elem}, handler: handleToggleModal})

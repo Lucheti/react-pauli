@@ -12,22 +12,16 @@ fetchIntercept.register({
   },
 
   requestError: function (error) {
-    console.log('Request Error: ' + error)
     // Called when an error occured during another 'request' interceptor call
     return Promise.reject(error);
   },
 
   response: function (response) {
-    console.log('Response: ' , response)
-    if(!response.ok) {
-      console.log(response)
-    }
     // if (response.status === 400) localStorage.clear()
     return response;
   },
 
   responseError: function (error) {
-    console.log('Response Error: ' + error)
     return Promise.reject(error);
   }
 });

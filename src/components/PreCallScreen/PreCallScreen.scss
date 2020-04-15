@@ -1,17 +1,20 @@
 .pre-call-screen {
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  padding: 1rem 2rem;
+  border: 2px solid rgba(0,0,0,.2);
+  box-shadow: 0 0 5px rgba(0,0,0,.5);
+
+  & > * {
+    margin: 1rem 0;
+  }
 
   .dropdown-container {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    position: relative;
-    height: 10vh;
+    width: 100%;
 
     .dropdown {
       display: flex;
@@ -21,22 +24,21 @@
     }
 
     input {
-      padding: 2rem;
+      padding: 1rem 2rem;
       font-size: 2rem;
-      border-radius: 5rem;
-      border: 5px solid var(--grey);
       outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+      border: none;
     }
   }
 
   .start {
-    padding: 5rem 7rem;
-    font-size: 5rem;
+    padding: 1rem 3rem;
+    font-size: 3rem;
     border: none;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, .5);
     transition: 1s;
+    border-radius: 5rem;
 
     &:hover {
       transition: 1s;

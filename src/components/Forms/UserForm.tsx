@@ -1,8 +1,8 @@
-import React from "react";
-import { useConnect } from "../Utils/useConnect";
-import { changeInput } from "../../Actions/FormActions";
-import "./Form.scss";
-import { Input } from "./Input/Input";
+import React from 'react'
+import { useConnect } from '../Utils/useConnect'
+import { changeInput } from '../../Actions/FormActions'
+import './Form.scss'
+import { Input } from './Input/Input'
 import {
   defaultErrormessage,
   defaultInputValidator,
@@ -10,11 +10,12 @@ import {
   mailValidator,
   passwordErrorMessage,
   passwordValidator
-} from "../Utils/InputValidators";
-import { InputOption, Select } from "./Select/Select";
-import { getCallcenters } from "../../requests/Requests";
+} from '../Utils/InputValidators'
+import { InputOption, Select } from './Select/Select'
+import { getCallcenters } from '../../requests/Requests'
 import { UserModel } from '../../types/UserModel'
 import { Role } from '../Enums/Role'
+import { AddUserFormId } from './constants'
 
 interface Props {
   onSubmit: (user: UserModel) => void;
@@ -158,11 +159,10 @@ export const UserForm: React.FC<Props> = useConnect(
             defaultValue={user?.callCenter.name}
           />
 
-          <input type={"submit"} value={"Entrar"} disabled={ false }/>
+          <input type={"submit"} value={"Agregar"} disabled={ formValid() }/>
         </form>
       </div>
     );
   }
 );
 
-export const AddUserFormId = "ADD_USER_FORM_ID_";

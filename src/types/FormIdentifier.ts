@@ -1,4 +1,4 @@
-import {AddUserFormId} from '../components/Forms/UserForm'
-import { LoginFormId } from '../components/Forms/LoginForm'
+
 import { SurveyFormId } from '../components/Home/AdminHome/SurveyPage/Constants'
-export type FormIdentifier = typeof AddUserFormId | typeof LoginFormId | typeof SurveyFormId
+import { AddCallCenterFormId, AddUserFormId, LoginFormId } from '../components/Forms/constants'
+export type FormIdentifier = typeof AddUserFormId | typeof LoginFormId | typeof SurveyFormId | typeof AddCallCenterFormId

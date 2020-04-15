@@ -8,31 +8,35 @@ import { UserModel } from "../../../../../types/UserModel";
 import { getUserByRole } from "../../../../../requests/Requests";
 import { Role } from "../../../../Enums/Role";
 import "./OperatorSelectPage.scss";
-import { SelectedOperatorsField, SurveyFormId } from "../Constants";
+import { NameField, OperatorSelectPageId, SelectedOperatorsField, SurveyFormId } from '../Constants'
 import { useConnect } from '../../../../Utils/useConnect'
 import { changeInput } from '../../../../../Actions/FormActions'
+import { SurveyStageButton } from '../SurveyStageButton/SurveyStageButton'
+import { SurveyStage } from '../../../../../States/FormStates/SurveyFormState'
 
 interface Props {
-  stage: string;
+  stage: SurveyStage;
 }
 
 const selectedOperatorsFilter = (selectedOperators: UserModel[]) => (data: UserModel[]) =>
   data.filter( user => !selectedOperators.find( operator => user.id === operator.id))
 
 export const OperatorSelectPage: React.FC<Props> = useConnect<Props>(
-  ({ stage, dispatch, state, children }) => {
-    if (stage !== OperatorSelectPageId) return null;
-
-    const selectedOperators = state.forms[SurveyFormId][SelectedOperatorsField];
+  ({ stage, dispatch, state }) => {
     const resource = useGetResource<UserModel[]>(() =>
       getUserByRole(Role.OPERATOR)
     );
+
+    if (stage !== OperatorSelectPageId) return null;
+
+    const selectedOperators = state.forms[SurveyFormId][SelectedOperatorsField];
     const onUserSelect = (list: UserModel[]) =>
       dispatch(changeInput(SurveyFormId, SelectedOperatorsField, list));
 
     return (
       <div className={"operator-select-page"}>
-        <Title title={"Seleccion de operadores"}>{children}</Title>
+        <input className={'name'} placeholder={'Nombre del campo'} onChange={(evt) => dispatch(changeInput(SurveyFormId, NameField, evt.target.value))}/>
+        <Title title={"Seleccion de operadores"}/>
         <div className={"selector-container"}>
 
           <Suspense fallback={<Spinner />}>
@@ -53,4 +57,3 @@ export const OperatorSelectPage: React.FC<Props> = useConnect<Props>(
   }
 );
 
-export const OperatorSelectPageId = "operator-select-page";
